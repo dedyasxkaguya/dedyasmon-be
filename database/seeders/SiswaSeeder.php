@@ -18,7 +18,7 @@ class SiswaSeeder extends Seeder
                 [
                     'nis' => '202523180',
                     'nisn' => '0096402000',
-                    'nama' => 'ADHELIA KHARUNISSA TOPARI',
+                    'nama' => 'ADHELIA KHARUNISSA TOFARI',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 10',
                     'tempat_lahir' => 'Jakarta',
@@ -128,7 +128,7 @@ class SiswaSeeder extends Seeder
                 [
                     'nis' => '202523191',
                     'nisn' => '0096851334',
-                    'nama' => 'CALLYLA SAKHI FAHRA',
+                    'nama' => 'CALLYLA SAKHI FAIHA',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 116',
                     'tempat_lahir' => 'Jakarta',
@@ -316,8 +316,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Jl. I No.18 RT.007/09 Kel. Rawasari Kec. Cempaka Putih 10570',
                 ],
                 [
-                    'nisn' => '202523210',
-                    'nis' => '001591468',
+                    'nis' => '202523210',
+                    'nisn' => '001591468',
                     'nama' => 'RIVAEL LIONEL MESSI BORYAN',
                     'gender' => 'LAKI-LAKI',
                     'asal_kelas' => 'SMP 116',
@@ -326,8 +326,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Jl. Pademangan III Gg. 10 No.20 RT.001/07 Kel. Pademangan Barat Kec. Pademangan 14410',
                 ],
                 [
-                    'nisn' => '202523211',
-                    'nis' => '003523271',
+                    'nis' => '202523211',
+                    'nisn' => '003523271',
                     'nama' => 'SADDAM QADAFI NURAMA',
                     'gender' => 'LAKI-LAKI',
                     'asal_kelas' => 'SMP 65',
@@ -336,8 +336,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Jl. Warakas I No.118 RT.010/14 Kel. Warakas Kec. Tanjung Priok 14340',
                 ],
                 [
-                    'nisn' => '202523212',
-                    'nis' => '0098549147',
+                    'nis' => '202523212',
+                    'nisn' => '0098549147',
                     'nama' => 'SAFA OKTAFIANTI',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 284',
@@ -346,8 +346,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Jl. Biduri Bulan VIII RT.009/06 Kel. Sumur Batu Kec. Kemayoran 13950',
                 ],
                 [
-                    'nisn' => '202523213',
-                    'nis' => '0096879230',
+                    'nis' => '202523213',
+                    'nisn' => '0096879230',
                     'nama' => 'SALSA NABILA',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 40',
@@ -356,8 +356,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Gg. Panca Marga RT.007/01 Kel. Bendungan Hilir Kec. Tanah Abang 10210',
                 ],
                 [
-                    'nisn' => '202523214',
-                    'nis' => '0091226874',
+                    'nis' => '202523214',
+                    'nisn' => '0091226874',
                     'nama' => 'SITI SYEERA AZZAHRAH',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 255',
@@ -366,8 +366,8 @@ class SiswaSeeder extends Seeder
                     'alamat' => 'Jl. Nusa Indah VI Gg. I No.23 RT.002/03 Kel. Malaka Jaya Kec. Duren Sawit 13460',
                 ],
                 [
-                    'nisn' => '202523215',
-                    'nis' => '001595467',
+                    'nis' => '202523215',
+                    'nisn' => '001595467',
                     'nama' => 'SYADIRA PUTRI AULIA',
                     'gender' => 'PEREMPUAN',
                     'asal_kelas' => 'SMP 42',

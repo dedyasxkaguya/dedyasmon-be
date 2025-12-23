@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
     public static function index()
     {
         return response()->json(Siswa::all());
+    }
+    public static function indexsmall()
+    {
+        $data = DB::select('SELECT id,name,nis FROM siswas');
+        return response()->json($data);
     }
 
     public static function show($slug)

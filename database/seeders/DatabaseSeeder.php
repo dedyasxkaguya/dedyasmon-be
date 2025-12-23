@@ -57,10 +57,10 @@ class DatabaseSeeder extends Seeder
 
         ];
         $accounts = [
-            ['id' => 1, 'email' => 'adhelia_kharunissa_topari@gmail.com', 'nis' => '202523180'],
+            ['id' => 1, 'email' => 'adhelia_kharunissa_tofari@gmail.com', 'nis' => '202523180'],
             ['id' => 2, 'email' => 'adilah_hammam_akram@gmail.com', 'nis' => '202523181'],
             ['id' => 3, 'email' => 'adinda_afifah_putri@gmail.com', 'nis' => '202523182'],
-            ['id' => 4, 'email' => 'adzan_ahll_fiqri@gmail.com', 'nis' => '202523183'],
+            ['id' => 4, 'email' => 'adzan_ahlil_fiqri@gmail.com', 'nis' => '202523183'],
             ['id' => 5, 'email' => 'aira_saskia_sahwa@gmail.com', 'nis' => '202523184'],
             ['id' => 6, 'email' => 'almira_rakhadhiya_aryacitadi@gmail.com', 'nis' => '202523185'],
             ['id' => 7, 'email' => 'annisa_maharani@gmail.com', 'nis' => '202523186'],
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 9, 'email' => 'arif_raffy_fadlurahman@gmail.com', 'nis' => '202523188'],
             ['id' => 10, 'email' => 'aryo_aji_sadewo@gmail.com', 'nis' => '202523189'],
             ['id' => 11, 'email' => 'cahaya@gmail.com', 'nis' => '202523190'],
-            ['id' => 12, 'email' => 'callyla_sakhi_fahra@gmail.com', 'nis' => '202523191'],
+            ['id' => 12, 'email' => 'callyla_sakhi_faiha@gmail.com', 'nis' => '202523191'],
             ['id' => 13, 'email' => 'dedy_anang_setiawan@gmail.com', 'nis' => '202523192'],
             ['id' => 14, 'email' => 'deje_enne_dani_rosaline@gmail.com', 'nis' => '202523193'],
             ['id' => 15, 'email' => 'dewa_nyoman_zed_zamuel_zouseuf@gmail.com', 'nis' => '202523194'],
