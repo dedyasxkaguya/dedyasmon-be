@@ -123,7 +123,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         $this->call(SubjectCommentSeeder::class);
+        $this->call(TeacherCommentSeeder::class);
         $this->call(TeacherSeeder::class);
         $this->call(SubjectSeeder::class);
+        $this->call(ScheduleSeeder::class);
     }
 }

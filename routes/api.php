@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SubjectCommentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherCommentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -30,7 +32,14 @@ Route::get('/subject/{id}', [SubjectController::class,'show']);
 Route::get('/comment/subjects', [SubjectCommentController::class,'index']);
 Route::get('/comment/subject/{id}', [SubjectCommentController::class,'show']);
 
+Route::get('/comment/teachers', [TeacherCommentController::class,'index']);
+Route::get('/comment/teacher/{id}', [TeacherCommentController::class,'show']);
+
+Route::get('/schedules', [ScheduleController::class,'index']);
+Route::get('/schedule/{id}', [ScheduleController::class,'show']);
 // POST
 
 Route::post('/user/register', [UserController::class,'storeData']);
 Route::post('/user/login', [UserController::class,'login']);
+
+Route::post('comment/teacher/add', [TeacherCommentController::class,'storeData']);

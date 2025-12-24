@@ -48,7 +48,7 @@ class SiswaSeeder extends Seeder
                 [
                     'nis' => '202523183',
                     'nisn' => '010175035',
-                    'nama' => 'ADZAN AHLL FIQRI',
+                    'nama' => 'ADZAN AHLIL FIQRI',
                     'gender' => 'LAKI-LAKI',
                     'asal_kelas' => 'SMP 119',
                     'tempat_lahir' => 'Jakarta',

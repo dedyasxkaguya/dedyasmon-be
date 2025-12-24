@@ -21,11 +21,11 @@ class TeacherSeeder extends Seeder
             ],
             [
                 'name' => 'Sudirwan',
-                'subject' => 'B. Indonesia',
+                'subject' => 'Indonesia',
             ],
             [
                 'name' => 'Neneng Desi M.',
-                'subject' => 'B. Inggris',
+                'subject' => 'English',
             ],
             [
                 'name' => 'Wanto Ari Wibowo',

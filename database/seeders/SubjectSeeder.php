@@ -18,7 +18,7 @@ class SubjectSeeder extends Seeder
     {
         $subjects = [
             [
-                'name' => 'B. Indonesia',
+                'name' => 'Indonesia',
                 'days' => [
                     [
                         'type' => 'double',
@@ -31,7 +31,7 @@ class SubjectSeeder extends Seeder
                 ],
             ],
             [
-                'name' => 'B. Inggris',
+                'name' => 'English',
                 'days' => [
                     [
                         'type' => 'double',
