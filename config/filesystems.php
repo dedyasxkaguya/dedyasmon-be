@@ -46,6 +46,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'real_public' => [
+            'driver' => 'local',
+            'root' => public_path(''),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

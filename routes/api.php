@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SubjectCommentController;
@@ -37,9 +38,15 @@ Route::get('/comment/teacher/{id}', [TeacherCommentController::class,'show']);
 
 Route::get('/schedules', [ScheduleController::class,'index']);
 Route::get('/schedule/{id}', [ScheduleController::class,'show']);
+
+Route::get('/photos', [PhotoController::class,'index']);
+Route::get('/photo/{id}', [PhotoController::class,'show']);
+
 // POST
 
 Route::post('/user/register', [UserController::class,'storeData']);
 Route::post('/user/login', [UserController::class,'login']);
 
 Route::post('comment/teacher/add', [TeacherCommentController::class,'storeData']);
+
+Route::post('/photo/add',[PhotoController::class,'storeData']);

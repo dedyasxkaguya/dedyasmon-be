@@ -52,7 +52,7 @@ class TeacherCommentSeeder extends Seeder
                 'updated_at'=>now(),
             ]);
 
-            TeacherComment::factory(16384)->create();
+            // TeacherComment::factory(32768)->create();
         }
     }
 }

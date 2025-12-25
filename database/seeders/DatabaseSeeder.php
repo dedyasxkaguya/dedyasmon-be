@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Siswa;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Siswa;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Pest\Support\Str;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -98,10 +98,12 @@ class DatabaseSeeder extends Seeder
         
         foreach ($accounts as $user) {
             $siswa = Siswa::find($user['id']);
+            $name = Str::of($siswa->name)->explode(' ');
             DB::table('users')->insert([
                 'slug' => Str::random(8),
                 'name' => $siswa->name,
-                'username' => $siswa->name,
+                'username' => Str::lower($name[0]) . '.' . (isset($name[1])? $name[1][0] : '') . (isset($name[2]) ? $name[2][0] : ' '),
+                // 'username' => Str::lower($name[0]),
                 'email' => $user['email'],
                 'role' => 'SISWA',
                 'password' => Hash::make($user['nis']),
@@ -127,5 +129,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TeacherSeeder::class);
         $this->call(SubjectSeeder::class);
         $this->call(ScheduleSeeder::class);
+        $this->call(PhotoSeeder::class);
     }
 }
