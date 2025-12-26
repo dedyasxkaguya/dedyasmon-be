@@ -32,7 +32,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    protected $casts = [
+        'projects'=>'array'
+    ];
     /**
      * Get the attributes that should be cast.
      *

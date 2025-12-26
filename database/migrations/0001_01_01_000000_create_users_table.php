@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('email')->unique();
+            $table->json('projects')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role',['SISWA','GURU','ADMIN','USER']);

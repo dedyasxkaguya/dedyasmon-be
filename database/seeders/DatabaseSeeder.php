@@ -130,5 +130,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectSeeder::class);
         $this->call(ScheduleSeeder::class);
         $this->call(PhotoSeeder::class);
+        $this->call(ProjectSeeder::class);
     }
 }

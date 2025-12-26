@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,13 +12,21 @@ use Pest\Support\Str;
 class UserController extends Controller
 {
     public static function index(){
-        return response()->json(User::all());
+        $data = User::all();
+        foreach($data as $d){
+            $d->projects = Project::where('user_id',$d->id)->get();
+        }
+        return response()->json($data);
     }
     public static function show($slug){
-        return response()->json(User::where('slug',$slug)->first());
+        $data = User::where('slug',$slug)->first();
+        $data->projects = Project::where('user_id',$data->id)->get();
+        return response()->json($data);
     }
     public static function detail($id){
-        return response()->json(User::find($id));
+        $data = User::find($id);
+        $data->projects = Project::where('user_id',$data->id)->get();
+        return response()->json($data);
     }
     public static function storeData(Request $request){
         $data = new User();

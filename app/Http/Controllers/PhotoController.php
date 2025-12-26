@@ -26,4 +26,10 @@ class PhotoController extends Controller
         
         return response()->json([$data,$user,$request],);
     }
+    public static function delete($id){
+        $data = Photo::find($id);
+        $data->delete();
+
+        return response()->json($data);
+    }
 }
