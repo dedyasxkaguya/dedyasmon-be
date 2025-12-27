@@ -336,6 +336,7 @@ class ProjectSeeder extends Seeder
         foreach($datas as $data){
             $user_id = fake()->randomElement([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]);
             DB::table('projects')->insert([
+                'category_id'=>fake()->randomElement([1,2,3]),
                 'user'=>json_encode(User::find($user_id)),
                 'data'=>json_encode($data['data']),
                 'user_id'=>$user_id

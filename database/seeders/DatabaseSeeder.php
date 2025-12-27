@@ -131,5 +131,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ScheduleSeeder::class);
         $this->call(PhotoSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(CategorySeeder::class);
     }
 }

@@ -10,12 +10,19 @@ class ProjectController extends Controller
 {
     public static function index()
     {
-        return response()->json(Project::all());
+        $data = Project::with('category')->get();
+        return response()->json($data);
     }
 
-    public static function show($id)
+    public static function show(Project $project)
     {
-        return response()->json(Project::find($id));
+        $project->load('category');
+        return response()->json($project);
+    }
+
+    public static function showCategory($id)
+    {
+        return response()->json(Project::where('category_id',$id)->get()->load('category'));
     }
 
     public static function storeData(Request $request)
@@ -30,13 +37,13 @@ class ProjectController extends Controller
         return response()->json($data);
     }
 
-    public static function delete($id)
+    public static function delete(Project $project)
     {
-        Project::find($id)->delete();
+        $project->delete();
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil Menghapus Projek dengan ID' .$id,
+            'message' => 'Berhasil Menghapus Projek dengan ID'.$project->id,
         ]);
     }
 }

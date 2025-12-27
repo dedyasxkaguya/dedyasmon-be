@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ScheduleController;
@@ -45,8 +46,14 @@ Route::get('/photo/{id}', [PhotoController::class,'show']);
 Route::get('/photo/delete/{id}',[PhotoController::class,'delete']);
 
 Route::get('/projects', [ProjectController::class,'index']);
-Route::get('/project/{id}', [ProjectController::class,'show']);
-Route::get('/project/delete/{id}', [ProjectController::class,'delete']);
+Route::get('/project/{project}', [ProjectController::class,'show']);
+Route::get('/project/category/{id}', [ProjectController::class,'showCategory']);
+Route::get('/project/delete/{project}', [ProjectController::class,'delete']);
+
+Route::get('/categories', [CategoryController::class,'index']);
+Route::get('/category/{category:slug}', [CategoryController::class,'show']);
+// Route::get('/category/project/{category}', [CategoryController::class,'show']);
+
 // POST
 
 Route::post('/user/register', [UserController::class,'storeData']);
