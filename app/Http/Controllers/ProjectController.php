@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public static function index()
     {
-        $data = Project::with('category')->get();
+        $data = Project::with('category')->latest()->get();
         return response()->json($data);
     }
 
@@ -30,6 +30,7 @@ class ProjectController extends Controller
         $data = new Project;
         $data->user = User::find($request->user_id);
         $data->user_id = $request->user_id;
+        $data->category_id = $request->category_id;
         $data->data = json_decode($request->data);
 
         $data->save();

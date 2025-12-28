@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public static function show($slug){
         $data = User::where('slug',$slug)->first();
-        $data->projects = Project::where('user_id',$data->id)->get();
+        $data->projects = Project::where('user_id',$data->id)->get()->load('category');
         return response()->json($data);
     }
     public static function detail($id){
