@@ -15,12 +15,15 @@ class UserController extends Controller
         $data = User::all();
         foreach($data as $d){
             $d->projects = Project::where('user_id',$d->id)->get();
+            $d->project_count = count($d->projects);
         }
         return response()->json($data);
     }
     public static function show($slug){
         $data = User::where('slug',$slug)->first();
-        $data->projects = Project::where('user_id',$data->id)->get()->load('category');
+        $projects = Project::where('user_id',$data->id)->get()->load('category');
+        $data->projects = $projects;
+        $data->project_count = count($projects);
         return response()->json($data);
     }
     public static function detail($id){

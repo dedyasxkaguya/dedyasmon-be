@@ -10,14 +10,21 @@ class ProjectController extends Controller
 {
     public static function index()
     {
-        $data = Project::with('category')->latest()->get();
+        $projects = Project::with('category')->latest()->get();
+        $data = $projects->map(function ($project) {
+            $project_arr = $project->toArray();
+            $project_arr['created_at'] = $project->created_at->diffForHumans();
+            return $project_arr;
+        });
         return response()->json($data);
     }
 
     public static function show(Project $project)
     {
         $project->load('category');
-        return response()->json($project);
+        $data = $project->toArray();
+        $data['created_at'] = $project->created_at->diffForHumans();
+        return response()->json($data);
     }
 
     public static function showCategory($id)

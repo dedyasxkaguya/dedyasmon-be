@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ScheduleController;
@@ -54,13 +55,18 @@ Route::get('/categories', [CategoryController::class,'index']);
 Route::get('/category/{category:slug}', [CategoryController::class,'show']);
 // Route::get('/category/project/{category}', [CategoryController::class,'show']);
 
+Route::get('/feedbacks', [FeedbackController::class,'index']);
+Route::get('/feedback/{feedback}', [FeedbackController::class,'show']);
+
 // POST
 
 Route::post('/user/register', [UserController::class,'storeData']);
 Route::post('/user/login', [UserController::class,'login']);
 
-Route::post('comment/teacher/add', [TeacherCommentController::class,'storeData']);
+Route::post('/comment/teacher/add', [TeacherCommentController::class,'storeData']);
 
 Route::post('/photo/add',[PhotoController::class,'storeData']);
 
 Route::post('/project/add',[ProjectController::class,'storeData']);
+
+Route::post('/feedback/add', [FeedbackController::class,'storeData']);

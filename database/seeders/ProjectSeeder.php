@@ -473,6 +473,8 @@ class ProjectSeeder extends Seeder
                 'user' => json_encode(User::find($user_id)),
                 'data' => json_encode($data['data']),
                 'user_id' => $user_id,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

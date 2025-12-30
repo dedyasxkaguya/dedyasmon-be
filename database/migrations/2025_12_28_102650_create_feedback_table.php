@@ -20,14 +20,16 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->integer('rating')->nullable();
             $table->text('text_ulasan')->nullable();
-            $table->enum('page_bug',['profil', 'projek', 'pelajaran', 'kelas', 'gallery', 'feedback', 'login', 'register', 'guru', 'Lainnya'])->nullable();
+            $table->enum('page_bug', ['profil', 'projek', 'pelajaran', 'kelas', 'gallery', 'feedback', 'login', 'register', 'guru', 'Lainnya'])
+                ->nullable();
             $table->text('text_bug')->nullable();
-            $table->foreignId('student_id')->nullable();
+            $table->foreignId('siswa_id')->nullable();
+            $table->string('collumn_wrong')->nullable();
             $table->string('data_wrong')->nullable();
             $table->string('data_right')->nullable();
-            $table->enum('page_fitur',
-            ['profil', 'projek', 'pelajaran', 'kelas', 'gallery', 'feedback', 'login', 'register', 'guru', 'Lainnya'])->nullable();
+            $table->enum('page_fitur', ['profil', 'projek', 'pelajaran', 'kelas', 'gallery', 'feedback', 'login', 'register', 'guru', 'Lainnya'])->nullable();
             $table->text('text_fitur')->nullable();
+            $table->foreignId('FeedbackComment_id');
             $table->timestamps();
         });
     }
