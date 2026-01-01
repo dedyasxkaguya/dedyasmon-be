@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
+use function Symfony\Component\Clock\now;
+
 class FeedbackController extends Controller
 {
     public static function index()
@@ -36,6 +38,7 @@ class FeedbackController extends Controller
             'data_right' => $request->data_right,
             'page_fitur' => $request->page_fitur,
             'text_fitur' => $request->text_fitur,
+            // 'created_at' => now()->diffForHuman();
         ];
         $status = Feedback::create($data)->save();
 

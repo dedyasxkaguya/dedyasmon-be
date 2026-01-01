@@ -60,5 +60,9 @@ class UserController extends Controller
                 'status'=>$data,'text'=>'Wrong email or password'
             ]);
         }
+        
+    }
+    public static function indexAdmin(){
+        return response()->json(User::where('role','ADMIN')->get());
     }
 }

@@ -13,6 +13,8 @@ class Feedback extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['formatted_date'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -21,5 +23,8 @@ class Feedback extends Model
     }
     public function comment(){
         return $this->hasMany(Comment::class);
+    }
+    public function getFormattedDateAttribute(){
+        return $this->created_at ? $this->created_at->diffForHumans() : 'Tidak ada data';
     }
 }
