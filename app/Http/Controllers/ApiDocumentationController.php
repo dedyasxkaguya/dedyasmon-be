@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class ApiDocumentationController extends Controller
@@ -25,7 +24,7 @@ class ApiDocumentationController extends Controller
                     ['method' => 'GET', 'endpoint' => '/user/detail/{id}', 'description' => 'Get detailed user info'],
                     ['method' => 'POST', 'endpoint' => '/user/register', 'description' => 'Register new user'],
                     ['method' => 'POST', 'endpoint' => '/user/login', 'description' => 'User login'],
-                ]
+                ],
             ],
             'students' => [
                 'name' => 'Students',
@@ -37,7 +36,7 @@ class ApiDocumentationController extends Controller
                     ['method' => 'GET', 'endpoint' => '/student/{slug}', 'description' => 'Get student by slug'],
                     ['method' => 'GET', 'endpoint' => '/student/detail/{id}/{len}', 'description' => 'Get detailed student info with length parameter'],
                     ['method' => 'POST', 'endpoint' => '/siswa/edit', 'description' => 'Update student data'],
-                ]
+                ],
             ],
             'teachers' => [
                 'name' => 'Teachers',
@@ -46,7 +45,7 @@ class ApiDocumentationController extends Controller
                 'routes' => [
                     ['method' => 'GET', 'endpoint' => '/teachers', 'description' => 'Get all teachers'],
                     ['method' => 'GET', 'endpoint' => '/teacher/{id}', 'description' => 'Get teacher by ID'],
-                ]
+                ],
             ],
             'subjects' => [
                 'name' => 'Subjects',
@@ -55,7 +54,7 @@ class ApiDocumentationController extends Controller
                 'routes' => [
                     ['method' => 'GET', 'endpoint' => '/subjects', 'description' => 'Get all subjects'],
                     ['method' => 'GET', 'endpoint' => '/subject/{id}', 'description' => 'Get subject by ID'],
-                ]
+                ],
             ],
             'comments' => [
                 'name' => 'Comments',
@@ -67,7 +66,7 @@ class ApiDocumentationController extends Controller
                     ['method' => 'GET', 'endpoint' => '/comment/teachers', 'description' => 'Get all teacher comments'],
                     ['method' => 'GET', 'endpoint' => '/comment/teacher/{id}', 'description' => 'Get comments for specific teacher'],
                     ['method' => 'POST', 'endpoint' => '/comment/teacher/add', 'description' => 'Add new teacher comment'],
-                ]
+                ],
             ],
             'schedules' => [
                 'name' => 'Schedules',
@@ -76,7 +75,7 @@ class ApiDocumentationController extends Controller
                 'routes' => [
                     ['method' => 'GET', 'endpoint' => '/schedules', 'description' => 'Get all schedules'],
                     ['method' => 'GET', 'endpoint' => '/schedule/{id}', 'description' => 'Get schedule by ID'],
-                ]
+                ],
             ],
             'media' => [
                 'name' => 'Media & Projects',
@@ -92,7 +91,7 @@ class ApiDocumentationController extends Controller
                     ['method' => 'GET', 'endpoint' => '/project/category/{id}', 'description' => 'Get projects by category ID'],
                     ['method' => 'GET', 'endpoint' => '/project/delete/{project}', 'description' => 'Delete project by ID'],
                     ['method' => 'POST', 'endpoint' => '/project/add', 'description' => 'Create new project'],
-                ]
+                ],
             ],
             'categories' => [
                 'name' => 'Categories',
@@ -101,7 +100,7 @@ class ApiDocumentationController extends Controller
                 'routes' => [
                     ['method' => 'GET', 'endpoint' => '/categories', 'description' => 'Get all categories'],
                     ['method' => 'GET', 'endpoint' => '/category/{category:slug}', 'description' => 'Get category by slug'],
-                ]
+                ],
             ],
             'feedbacks' => [
                 'name' => 'Feedback',
@@ -111,7 +110,7 @@ class ApiDocumentationController extends Controller
                     ['method' => 'GET', 'endpoint' => '/feedbacks', 'description' => 'Get all feedbacks'],
                     ['method' => 'GET', 'endpoint' => '/feedback/{feedback}', 'description' => 'Get feedback by ID'],
                     ['method' => 'POST', 'endpoint' => '/feedback/add', 'description' => 'Submit new feedback'],
-                ]
+                ],
             ],
         ];
 
@@ -127,10 +126,10 @@ class ApiDocumentationController extends Controller
     {
         $routes = Route::getRoutes();
         $apiRoutes = [];
-        
+
         foreach ($routes as $route) {
             // Filter only API routes (routes defined in api.php)
-            if (strpos($route->uri(), 'api/') === 0 || !str_contains($route->uri(), 'sanctum')) {
+            if (strpos($route->uri(), 'api/') === 0 || ! str_contains($route->uri(), 'sanctum')) {
                 $apiRoutes[] = [
                     'method' => implode('|', $route->methods()),
                     'uri' => $route->uri(),
@@ -139,7 +138,33 @@ class ApiDocumentationController extends Controller
                 ];
             }
         }
-        
-        return view('api-docs-dynamic', compact('apiRoutes'));
+
+        // return view('api-docs-dynamic', compact('apiRoutes'));
+        return response()->json($apiRoutes);
+    }
+
+    // In ApiDocumentationController.php
+    private function parseRoutesFromApiFile()
+    {
+        $apiRoutes = [];
+        $routeFilePath = base_path('routes/api.php');
+
+        if (file_exists($routeFilePath)) {
+            $content = file_get_contents($routeFilePath);
+
+            // Simple regex to extract route definitions (for demonstration)
+            // In production, use Laravel's Route facade as shown in dynamicIndex()
+            preg_match_all('/Route::(get|post|put|delete|patch)\(\'([^\']+)\',\s*\[([^]]+)\]\);/', $content, $matches, PREG_SET_ORDER);
+
+            foreach ($matches as $match) {
+                $apiRoutes[] = [
+                    'method' => strtoupper($match[1]),
+                    'endpoint' => $match[2],
+                    'controller' => $match[3],
+                ];
+            }
+        }
+
+        return $apiRoutes;
     }
 }
