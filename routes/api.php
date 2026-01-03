@@ -64,6 +64,8 @@ Route::get('/feedback/{feedback}', [FeedbackController::class,'show']);
 Route::post('/user/register', [UserController::class,'storeData']);
 Route::post('/user/login', [UserController::class,'login']);
 
+Route::post('/siswa/edit', [SiswaController::class,'update']);
+
 Route::post('/comment/teacher/add', [TeacherCommentController::class,'storeData']);
 
 Route::post('/photo/add',[PhotoController::class,'storeData']);

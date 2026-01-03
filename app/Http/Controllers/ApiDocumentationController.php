@@ -3,353 +3,143 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ApiDocumentationController extends Controller
 {
+    /**
+     * Display API documentation page
+     */
     public function index()
     {
-        $endpoints = [
-            // User Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/users',
-                'controller' => 'UserController',
-                'action' => 'index',
-                'description' => 'Retrieve a list of all users',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/user/{slug}',
-                'controller' => 'UserController',
-                'action' => 'show',
-                'description' => 'Get user details by slug',
-                'parameters' => [
-                    ['name' => 'slug', 'type' => 'string', 'description' => 'User slug identifier']
-                ]
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/user/detail/{id}',
-                'controller' => 'UserController',
-                'action' => 'detail',
-                'description' => 'Get detailed user information by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'User ID']
-                ]
-            ],
-            [
-                'method' => 'POST',
-                'url' => '/user/register',
-                'controller' => 'UserController',
-                'action' => 'storeData',
-                'description' => 'Register a new user',
-                'parameters' => [
-                    ['name' => 'name', 'type' => 'string', 'description' => 'User full name'],
-                    ['name' => 'email', 'type' => 'string', 'description' => 'User email address'],
-                    ['name' => 'password', 'type' => 'string', 'description' => 'User password']
-                ]
-            ],
-            [
-                'method' => 'POST',
-                'url' => '/user/login',
-                'controller' => 'UserController',
-                'action' => 'login',
-                'description' => 'Authenticate user and return access token',
-                'parameters' => [
-                    ['name' => 'email', 'type' => 'string', 'description' => 'User email'],
-                    ['name' => 'password', 'type' => 'string', 'description' => 'User password']
-                ]
-            ],
-            // Students Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/students',
-                'controller' => 'SiswaController',
-                'action' => 'index',
-                'description' => 'Get list of all students',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/students/min',
-                'controller' => 'SiswaController',
-                'action' => 'indexsmall',
-                'description' => 'Get minimal student list (limited fields)',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/student/{slug}',
-                'controller' => 'SiswaController',
-                'action' => 'show',
-                'description' => 'Get student details by slug',
-                'parameters' => [
-                    ['name' => 'slug', 'type' => 'string', 'description' => 'Student slug identifier']
-                ]
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/student/detail/{id}/{len}',
-                'controller' => 'SiswaController',
-                'action' => 'detail',
-                'description' => 'Get detailed student information with specific length',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Student ID'],
-                    ['name' => 'len', 'type' => 'integer', 'description' => 'Length of data to return']
-                ]
-            ],
-            // Teachers Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/teachers',
-                'controller' => 'TeacherController',
-                'action' => 'index',
-                'description' => 'Retrieve all teachers',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/teacher/{id}',
-                'controller' => 'TeacherController',
-                'action' => 'show',
-                'description' => 'Get teacher by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Teacher ID']
-                ]
-            ],
-            // Subjects Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/subjects',
-                'controller' => 'SubjectController',
-                'action' => 'index',
-                'description' => 'Get all subjects',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/subject/{id}',
-                'controller' => 'SubjectController',
-                'action' => 'show',
-                'description' => 'Get subject by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Subject ID']
-                ]
-            ],
-            // Comments Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/comment/subjects',
-                'controller' => 'SubjectCommentController',
-                'action' => 'index',
-                'description' => 'Get all subject comments',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/comment/subject/{id}',
-                'controller' => 'SubjectCommentController',
-                'action' => 'show',
-                'description' => 'Get comments for a specific subject',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Subject ID']
-                ]
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/comment/teachers',
-                'controller' => 'TeacherCommentController',
-                'action' => 'index',
-                'description' => 'Get all teacher comments',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/comment/teacher/{id}',
-                'controller' => 'TeacherCommentController',
-                'action' => 'show',
-                'description' => 'Get comments for a specific teacher',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Teacher ID']
-                ]
-            ],
-            [
-                'method' => 'POST',
-                'url' => '/comment/teacher/add',
-                'controller' => 'TeacherCommentController',
-                'action' => 'storeData',
-                'description' => 'Add a new comment for a teacher',
-                'parameters' => [
-                    ['name' => 'teacher_id', 'type' => 'integer', 'description' => 'Teacher ID'],
-                    ['name' => 'comment', 'type' => 'string', 'description' => 'Comment text'],
-                    ['name' => 'rating', 'type' => 'integer', 'description' => 'Rating (1-5)']
-                ]
-            ],
-            // Schedules Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/schedules',
-                'controller' => 'ScheduleController',
-                'action' => 'index',
-                'description' => 'Get all schedules',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/schedule/{id}',
-                'controller' => 'ScheduleController',
-                'action' => 'show',
-                'description' => 'Get schedule by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Schedule ID']
-                ]
-            ],
-            // Photos Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/photos',
-                'controller' => 'PhotoController',
-                'action' => 'index',
-                'description' => 'Get all photos',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/photo/{id}',
-                'controller' => 'PhotoController',
-                'action' => 'show',
-                'description' => 'Get photo by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Photo ID']
-                ]
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/photo/delete/{id}',
-                'controller' => 'PhotoController',
-                'action' => 'delete',
-                'description' => 'Delete a photo by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Photo ID']
-                ]
-            ],
-            [
-                'method' => 'POST',
-                'url' => '/photo/add',
-                'controller' => 'PhotoController',
-                'action' => 'storeData',
-                'description' => 'Upload a new photo',
-                'parameters' => [
-                    ['name' => 'image', 'type' => 'file', 'description' => 'Image file'],
-                    ['name' => 'title', 'type' => 'string', 'description' => 'Photo title'],
-                    ['name' => 'description', 'type' => 'string', 'description' => 'Photo description']
-                ]
-            ],
-            // Projects Endpoints
-            [
-                'method' => 'GET',
-                'url' => '/projects',
-                'controller' => 'ProjectController',
-                'action' => 'index',
-                'description' => 'Get all projects',
-                'parameters' => []
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/project/{id}',
-                'controller' => 'ProjectController',
-                'action' => 'show',
-                'description' => 'Get project by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Project ID']
-                ]
-            ],
-            [
-                'method' => 'GET',
-                'url' => '/project/delete/{id}',
-                'controller' => 'ProjectController',
-                'action' => 'delete',
-                'description' => 'Delete a project by ID',
-                'parameters' => [
-                    ['name' => 'id', 'type' => 'integer', 'description' => 'Project ID']
-                ]
-            ],
-            [
-                'method' => 'POST',
-                'url' => '/project/add',
-                'controller' => 'ProjectController',
-                'action' => 'storeData',
-                'description' => 'Create a new project',
-                'parameters' => [
-                    ['name' => 'title', 'type' => 'string', 'description' => 'Project title'],
-                    ['name' => 'description', 'type' => 'string', 'description' => 'Project description'],
-                    ['name' => 'due_date', 'type' => 'date', 'description' => 'Project due date']
-                ]
-            ],
-        ];
-
-        // Group endpoints into sections
-        $sections = [
+        // Group routes by resource for organized display
+        $apiGroups = [
             'users' => [
                 'name' => 'User Management',
-                'icon' => '👤',
-                'description' => 'Endpoints for user registration, authentication, and profile management',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'UserController');
-                })
+                'icon' => 'fas fa-users',
+                'description' => 'User registration, authentication, and profile management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/users', 'description' => 'Get all users'],
+                    ['method' => 'GET', 'endpoint' => '/admins', 'description' => 'Get all admin users'],
+                    ['method' => 'GET', 'endpoint' => '/user/{slug}', 'description' => 'Get user by slug'],
+                    ['method' => 'GET', 'endpoint' => '/user/detail/{id}', 'description' => 'Get detailed user info'],
+                    ['method' => 'POST', 'endpoint' => '/user/register', 'description' => 'Register new user'],
+                    ['method' => 'POST', 'endpoint' => '/user/login', 'description' => 'User login'],
+                ]
             ],
             'students' => [
                 'name' => 'Students',
-                'icon' => '🎓',
-                'description' => 'Endpoints for managing student data',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'SiswaController');
-                })
+                'icon' => 'fas fa-graduation-cap',
+                'description' => 'Student data management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/students', 'description' => 'Get all students'],
+                    ['method' => 'GET', 'endpoint' => '/students/min', 'description' => 'Get minimal student list'],
+                    ['method' => 'GET', 'endpoint' => '/student/{slug}', 'description' => 'Get student by slug'],
+                    ['method' => 'GET', 'endpoint' => '/student/detail/{id}/{len}', 'description' => 'Get detailed student info with length parameter'],
+                    ['method' => 'POST', 'endpoint' => '/siswa/edit', 'description' => 'Update student data'],
+                ]
             ],
             'teachers' => [
                 'name' => 'Teachers',
-                'icon' => '👨‍🏫',
-                'description' => 'Endpoints for teacher information',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'TeacherController');
-                })
+                'icon' => 'fas fa-chalkboard-teacher',
+                'description' => 'Teacher information and management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/teachers', 'description' => 'Get all teachers'],
+                    ['method' => 'GET', 'endpoint' => '/teacher/{id}', 'description' => 'Get teacher by ID'],
+                ]
             ],
             'subjects' => [
                 'name' => 'Subjects',
-                'icon' => '📚',
-                'description' => 'Endpoints for subject data',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'SubjectController');
-                })
+                'icon' => 'fas fa-book',
+                'description' => 'Subject/course management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/subjects', 'description' => 'Get all subjects'],
+                    ['method' => 'GET', 'endpoint' => '/subject/{id}', 'description' => 'Get subject by ID'],
+                ]
             ],
             'comments' => [
                 'name' => 'Comments',
-                'icon' => '💬',
-                'description' => 'Endpoints for managing comments on teachers and subjects',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'CommentController');
-                })
+                'icon' => 'fas fa-comments',
+                'description' => 'Teacher and subject comments',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/comment/subjects', 'description' => 'Get all subject comments'],
+                    ['method' => 'GET', 'endpoint' => '/comment/subject/{id}', 'description' => 'Get comments for specific subject'],
+                    ['method' => 'GET', 'endpoint' => '/comment/teachers', 'description' => 'Get all teacher comments'],
+                    ['method' => 'GET', 'endpoint' => '/comment/teacher/{id}', 'description' => 'Get comments for specific teacher'],
+                    ['method' => 'POST', 'endpoint' => '/comment/teacher/add', 'description' => 'Add new teacher comment'],
+                ]
             ],
             'schedules' => [
                 'name' => 'Schedules',
-                'icon' => '📅',
-                'description' => 'Endpoints for schedule management',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'ScheduleController');
-                })
+                'icon' => 'fas fa-calendar-alt',
+                'description' => 'Class and event scheduling',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/schedules', 'description' => 'Get all schedules'],
+                    ['method' => 'GET', 'endpoint' => '/schedule/{id}', 'description' => 'Get schedule by ID'],
+                ]
             ],
             'media' => [
                 'name' => 'Media & Projects',
-                'icon' => '📁',
-                'description' => 'Endpoints for photos and projects management',
-                'endpoints' => array_filter($endpoints, function($endpoint) {
-                    return str_contains($endpoint['controller'], 'PhotoController') || 
-                           str_contains($endpoint['controller'], 'ProjectController');
-                })
-            ]
+                'icon' => 'fas fa-images',
+                'description' => 'Photos, projects, and media management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/photos', 'description' => 'Get all photos'],
+                    ['method' => 'GET', 'endpoint' => '/photo/{id}', 'description' => 'Get photo by ID'],
+                    ['method' => 'GET', 'endpoint' => '/photo/delete/{id}', 'description' => 'Delete photo by ID'],
+                    ['method' => 'POST', 'endpoint' => '/photo/add', 'description' => 'Upload new photo'],
+                    ['method' => 'GET', 'endpoint' => '/projects', 'description' => 'Get all projects'],
+                    ['method' => 'GET', 'endpoint' => '/project/{project}', 'description' => 'Get project by ID'],
+                    ['method' => 'GET', 'endpoint' => '/project/category/{id}', 'description' => 'Get projects by category ID'],
+                    ['method' => 'GET', 'endpoint' => '/project/delete/{project}', 'description' => 'Delete project by ID'],
+                    ['method' => 'POST', 'endpoint' => '/project/add', 'description' => 'Create new project'],
+                ]
+            ],
+            'categories' => [
+                'name' => 'Categories',
+                'icon' => 'fas fa-folder',
+                'description' => 'Project category management',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/categories', 'description' => 'Get all categories'],
+                    ['method' => 'GET', 'endpoint' => '/category/{category:slug}', 'description' => 'Get category by slug'],
+                ]
+            ],
+            'feedbacks' => [
+                'name' => 'Feedback',
+                'icon' => 'fas fa-comment-dots',
+                'description' => 'User feedback and reviews',
+                'routes' => [
+                    ['method' => 'GET', 'endpoint' => '/feedbacks', 'description' => 'Get all feedbacks'],
+                    ['method' => 'GET', 'endpoint' => '/feedback/{feedback}', 'description' => 'Get feedback by ID'],
+                    ['method' => 'POST', 'endpoint' => '/feedback/add', 'description' => 'Submit new feedback'],
+                ]
+            ],
         ];
 
-        return view('welcome', compact('endpoints', 'sections'));
+        return view('api-docs', compact('apiGroups'));
+    }
+
+    /**
+     * Alternative: Dynamic route parsing from Laravel routes
+     * This method automatically extracts routes from the Route facade
+     * Note: This is more advanced but included for reference
+     */
+    public function dynamicIndex()
+    {
+        $routes = Route::getRoutes();
+        $apiRoutes = [];
+        
+        foreach ($routes as $route) {
+            // Filter only API routes (routes defined in api.php)
+            if (strpos($route->uri(), 'api/') === 0 || !str_contains($route->uri(), 'sanctum')) {
+                $apiRoutes[] = [
+                    'method' => implode('|', $route->methods()),
+                    'uri' => $route->uri(),
+                    'name' => $route->getName(),
+                    'action' => $route->getActionName(),
+                ];
+            }
+        }
+        
+        return view('api-docs-dynamic', compact('apiRoutes'));
     }
 }

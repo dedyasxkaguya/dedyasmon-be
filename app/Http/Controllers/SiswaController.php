@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
@@ -19,7 +20,7 @@ class SiswaController extends Controller
 
     public static function show($slug)
     {
-        return response()->json(Siswa::where('slug', $slug)->first());
+        return response()->json(Siswa::where('slug', $slug)->with('user')->first());
     }
 
     public static function detail($id, $len)
@@ -38,5 +39,20 @@ class SiswaController extends Controller
         } else {
             return response()->json(Siswa::find($id));
         }
+    }
+    public static function update(Request $request){
+        $siswa = Siswa::find($request->id);
+        $siswa->name = $request->name;
+        $siswa->user->username = $request->username;
+        $siswa->nis = $request->nis;
+        $siswa->nisn = $request->nisn;
+        $siswa->asal_sekolah = $request->asal_sekolah;
+        $siswa->user->email = $request->email;
+        $siswa->tempat_lahir = $request->tempat_lahir;
+        $siswa->tanggal_lahir = $request->tanggal_lahir;
+        $siswa->alamat = $request->alamat;
+
+        $siswa->push();
+        return response()->json($siswa);
     }
 }

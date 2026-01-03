@@ -377,8 +377,10 @@ class SiswaSeeder extends Seeder
                 ],
         ];
 
+        $i = 1;
         foreach ($siswas as $siswa) {
             DB::table('siswas')->insert([
+                'user_id' => $i,
                 'nis' => $siswa['nis'],
                 'nisn' => $siswa['nisn'],
                 'name' => $siswa['nama'],
@@ -391,6 +393,7 @@ class SiswaSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            $i++;
         }
     }
 }

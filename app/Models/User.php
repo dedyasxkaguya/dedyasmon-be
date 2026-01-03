@@ -47,4 +47,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // public function siswa(){
+    //     return $this->belongsTo(Siswa::class);
+    // }
 }

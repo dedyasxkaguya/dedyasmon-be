@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('data_right')->nullable();
             $table->enum('page_fitur', ['profil', 'projek', 'pelajaran', 'kelas', 'gallery', 'feedback', 'login', 'register', 'guru', 'Lainnya'])->nullable();
             $table->text('text_fitur')->nullable();
-            $table->foreignId('FeedbackComment_id');
+            // $table->foreignId('FeedbackComment_id');
             $table->timestamps();
         });
     }
